@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<senales>
+	<senal nombre="Ejemplo1" t="5" A="4">
+		<dato t="1" A="1">0</dato>
+		<dato t="1" A="2">59</dato>
+		<dato t="1" A="3">84</dato>
+		<dato t="1" A="4">0</dato>
+		<dato t="2" A="1">5</dato>
+		<dato t="2" A="2">80</dato>
+		<dato t="2" A="3">97</dato>
+		<dato t="2" A="4">2</dato>
+		<dato t="3" A="1">5</dato>
+		<dato t="3" A="2">5</dato>
+		<dato t="3" A="3">0</dato>
+		<dato t="3" A="4">50</dato>
+		<dato t="4" A="1">17</dato>
+		<dato t="4" A="2">48</dato>
+		<dato t="4" A="3">33</dato>
+		<dato t="4" A="4">72</dato>
+		<dato t="5" A="1">26</dato>
+		<dato t="5" A="2">37</dato>
+		<dato t="5" A="3">0</dato>
+		<dato t="5" A="4">0</dato>
+	</senal>
+	<senal nombre="Ejemplo2" t="5" A="4">
+		<dato t="1" A="1">17</dato>
+		<dato t="1" A="2">81</dato>
+		<dato t="1" A="3">39</dato>
+		<dato t="1" A="4">82</dato>
+		<dato t="2" A="1">21</dato>
+		<dato t="2" A="2">66</dato>
+		<dato t="2" A="3">0</dato>
+		<dato t="2" A="4">59</dato>
+		<dato t="3" A="1">88</dato>
+		<dato t="3" A="2">98</dato>
+		<dato t="3" A="3">20</dato>
+		<dato t="3" A="4">68</dato>
+		<dato t="4" A="1">56</dato>
+		<dato t="4" A="2">50</dato>
+		<dato t="4" A="3">44</dato>
+		<dato t="4" A="4">0</dato>
+		<dato t="5" A="1">55</dato>
+		<dato t="5" A="2">14</dato>
+		<dato t="5" A="3">90</dato>
+		<dato t="5" A="4">0</dato>
+	</senal>
+	<senal nombre="Ejemplo3" t="4" A="5">
+		<dato t="1" A="1">28</dato>
+		<dato t="1" A="2">85</dato>
+		<dato t="1" A="3">0</dato>
+		<dato t="1" A="4">0</dato>
+		<dato t="1" A="5">0</dato>
+		<dato t="2" A="1">22</dato>
+		<dato t="2" A="2">0</dato>
+		<dato t="2" A="3">81</dato>
+		<dato t="2" A="4">15</dato>
+		<dato t="2" A="5">5</dato>
+		<dato t="3" A="1">66</dato>
+		<dato t="3" A="2">49</dato>
+		<dato t="3" A="3">88</dato>
+		<dato t="3" A="4">82</dato>
+		<dato t="3" A="5">83</dato>
+		<dato t="4" A="1">57</dato>
+		<dato t="4" A="2">76</dato>
+		<dato t="4" A="3">11</dato>
+		<dato t="4" A="4">31</dato>
+		<dato t="4" A="5">41</dato>
+	</senal>
+</senales>
