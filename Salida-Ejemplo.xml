@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<senales>
+	<senal name="Ejemplo1" t="4" A="4">
+		<grupos G="1">
+			<tiempo>1</tiempo>
+			<datosGrupo>
+				<dato t="1" A="1">0</dato>
+				<dato t="1" A="2">59</dato>
+				<dato t="1" A="3">84</dato>
+				<dato t="1" A="4">0</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="2">
+			<tiempo>2, 4</tiempo>
+			<datosGrupo>
+				<dato t="2" A="1">22</dato>
+				<dato t="2" A="2">128</dato>
+				<dato t="2" A="3">130</dato>
+				<dato t="2" A="4">74</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="3">
+			<tiempo>3</tiempo>
+			<datosGrupo>
+				<dato t="3" A="1">5</dato>
+				<dato t="3" A="2">5</dato>
+				<dato t="3" A="3">0</dato>
+				<dato t="3" A="4">50</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="4">
+			<tiempo>5</tiempo>
+			<datosGrupo>
+				<dato t="4" A="1">26</dato>
+				<dato t="4" A="2">37</dato>
+				<dato t="4" A="3">0</dato>
+				<dato t="4" A="4">0</dato>
+			</datosGrupo>
+		</grupos>
+	</senal>
+	<senal name="Ejemplo2" t="3" A="4">
+		<grupos G="1">
+			<tiempo>1, 3</tiempo>
+			<datosGrupo>
+				<dato t="1" A="1">105</dato>
+				<dato t="1" A="2">179</dato>
+				<dato t="1" A="3">59</dato>
+				<dato t="1" A="4">150</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="2">
+			<tiempo>2</tiempo>
+			<datosGrupo>
+				<dato t="2" A="1">21</dato>
+				<dato t="2" A="2">66</dato>
+				<dato t="2" A="3">0</dato>
+				<dato t="2" A="4">59</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="3">
+			<tiempo>4, 5</tiempo>
+			<datosGrupo>
+				<dato t="3" A="1">111</dato>
+				<dato t="3" A="2">64</dato>
+				<dato t="3" A="3">134</dato>
+				<dato t="3" A="4">0</dato>
+			</datosGrupo>
+		</grupos>
+	</senal>
+	<senal name="Ejemplo3" t="3" A="5">
+		<grupos G="1">
+			<tiempo>1</tiempo>
+			<datosGrupo>
+				<dato t="1" A="1">28</dato>
+				<dato t="1" A="2">85</dato>
+				<dato t="1" A="3">0</dato>
+				<dato t="1" A="4">0</dato>
+				<dato t="1" A="5">0</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="2">
+			<tiempo>2</tiempo>
+			<datosGrupo>
+				<dato t="2" A="1">22</dato>
+				<dato t="2" A="2">0</dato>
+				<dato t="2" A="3">81</dato>
+				<dato t="2" A="4">15</dato>
+				<dato t="2" A="5">5</dato>
+			</datosGrupo>
+		</grupos>
+		<grupos G="3">
+			<tiempo>3, 4</tiempo>
+			<datosGrupo>
+				<dato t="3" A="1">123</dato>
+				<dato t="3" A="2">125</dato>
+				<dato t="3" A="3">99</dato>
+				<dato t="3" A="4">113</dato>
+				<dato t="3" A="5">124</dato>
+			</datosGrupo>
+		</grupos>
+	</senal>
+</senales>

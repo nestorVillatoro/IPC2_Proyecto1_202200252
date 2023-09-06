@@ -1,97 +1,119 @@
 from listasColas import *
 
-class Fila:
+class fila:
 
-    def __init__(self):
-        self.Inicio = None
-        self.Final = None
-        self.Contador = 0
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.tiempo = "Tiempo "
+        self.inicio = None
+        self.final = None
+        self.contador = 0
 
-    def Insertar(self):
-        NuevoNodo = Nodo_Dato()
-        self.Contador += 1
-        if self.Inicio == None:
-            self.Inicio = NuevoNodo
-            self.Final = NuevoNodo
+    def insertar(self):
+        nodoNuevo = nodoDato()
+        self.contador += 1
+        if self.inicio == None:
+            self.inicio = nodoNuevo
+            self.final = nodoNuevo
         else:
-            self.Final.AsignarSiguiente(NuevoNodo)
-            self.Final = NuevoNodo
+            self.final.AsignarSiguiente(nodoNuevo)
+            self.final = nodoNuevo
     
-    def ImprimirFila(self):
-        Auxiliar = self.Inicio
+    def imprimirfila(self):
+        Auxiliar = self.inicio
         fila = ""
         while Auxiliar != None:
             fila = fila + " | " + (str(Auxiliar.ObtenerDato()))
             Auxiliar = Auxiliar.Siguiente
-        print(fila + "|")
+        print(fila + " | ")
 
-    def ModificarDatoenColumna(self, columna, dato):
-        Contador = 0
-        Auxiliar = self.Inicio
-        if columna == 0 or columna > self.Contador:
+    def modificarDatoenColumna(self, columna, dato):
+        contador = 0
+        Auxiliar = self.inicio
+        if columna == 0 or columna > self.contador:
             print("No existe la columna!")
             return
         else:
             while Auxiliar != None:
-                Contador += 1
-                if Contador == columna:
+                contador += 1
+                if contador == columna:
                     Auxiliar.CambiarDato(dato)
                 else:
                     Auxiliar = Auxiliar.Siguiente
 
-    def BuscarDatoenColumna(self, columna):
-        Contador = 0
-        Auxiliar = self.Inicio
-        if columna == 0 or columna > self.Contador:
+    def buscarDatoenColumna(self, columna):
+        contador = 0
+        Auxiliar = self.inicio
+        if columna == 0 or columna > self.contador:
             print("No existe la columna!")
             return
         else:
             while Auxiliar != None:
-                Contador += 1
-                if Contador == columna:
+                contador += 1
+                if contador == columna:
                     dato = Auxiliar.ObtenerDato()
                     return dato
                 else:
                     Auxiliar = Auxiliar.Siguiente
 
-class Nodo_Dato:
+    def Datosfila(self):
+        Auxiliar = self.inicio
+        datosfila = ""
+        while Auxiliar != None:
+            datoColumna = str(Auxiliar.ObtenerDato())
+            datosfila = datosfila + datoColumna + " "
+            Auxiliar = Auxiliar.Siguiente
+        return datosfila
+    
+    def CambioNombrefila(self, nombre):
+        self.nombre = nombre
+
+    def ObtenerNombre(self):
+        nombre = self.nombre
+        return nombre
+
+class nodoDato:
     def __init__(self):
         self.dato = 0
         self.Siguiente = None
 
-    def AsignarSiguiente(self, nodo_random):
-        self.Siguiente = nodo_random
+    def AsignarSiguiente(self, nodorandom):
+        self.Siguiente = nodorandom
 
     def ObtenerDato(self):
-        return self.dato
+        dato = self.dato
+        return dato
     
     def CambiarDato(self, Nuevo_Dato):
         self.dato = Nuevo_Dato
 
-class Nodo_Fila:
-    def __init__(self, columnas):
+class nodofila:
+    def __init__(self, columnas, nombre):
         contador = 0
         self.Siguiente = None
-        Filas = Fila()
+        filas = fila(nombre)
         while contador < columnas:
-            Filas.Insertar()
+            filas.insertar()
             contador += 1
-        self.fila = Filas
+        self.fila = filas
 
-    def AsignarSiguiente(self, nodo_random):
-        self.Siguiente = nodo_random
+    def AsignarSiguiente(self, nodorandom):
+        self.Siguiente = nodorandom
 
-    def ObtenerFila(self):
+    def Obtenerfila(self):
         return self.fila
+    
+    def DevolverSiguiente(self):
+        return self.Siguiente
 
-class Nodo_Senial:
-    def __init__(self, senial):
-        self.senial  = senial
+class nodosenal:
+    def __init__(self, senal):
+        self.senal  = senal
         self.Siguiente = None
 
-    def AsignarSiguiente(self, nodo_random):
-        self.Siguiente = nodo_random
+    def AsignarSiguiente(self, nodorandom):
+        self.Siguiente = nodorandom
 
-    def ObtenerSenial(self):
-        return self.senial
+    def Obtenersenal(self):
+        return self.senal
     
