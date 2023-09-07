@@ -27,20 +27,6 @@ class fila:
             Auxiliar = Auxiliar.Siguiente
         print(fila + " | ")
 
-    def modificarDatoenColumna(self, columna, dato):
-        contador = 0
-        Auxiliar = self.inicio
-        if columna == 0 or columna > self.contador:
-            print("No existe la columna!")
-            return
-        else:
-            while Auxiliar != None:
-                contador += 1
-                if contador == columna:
-                    Auxiliar.CambiarDato(dato)
-                else:
-                    Auxiliar = Auxiliar.Siguiente
-
     def buscarDatoenColumna(self, columna):
         contador = 0
         Auxiliar = self.inicio
@@ -56,6 +42,20 @@ class fila:
                 else:
                     Auxiliar = Auxiliar.Siguiente
 
+    def modificarDatoenColumna(self, columna, dato):
+        contador = 0
+        Auxiliar = self.inicio
+        if columna == 0 or columna > self.contador:
+            print("No existe la columna!")
+            return
+        else:
+            while Auxiliar != None:
+                contador += 1
+                if contador == columna:
+                    Auxiliar.CambiarDato(dato)
+                else:
+                    Auxiliar = Auxiliar.Siguiente
+
     def Datosfila(self):
         Auxiliar = self.inicio
         datosfila = ""
@@ -65,7 +65,7 @@ class fila:
             Auxiliar = Auxiliar.Siguiente
         return datosfila
     
-    def CambioNombrefila(self, nombre):
+    def cambioNombrefila(self, nombre):
         self.nombre = nombre
 
     def ObtenerNombre(self):
@@ -87,7 +87,7 @@ class nodoDato:
     def CambiarDato(self, Nuevo_Dato):
         self.dato = Nuevo_Dato
 
-class nodofila:
+class nodoFila:
     def __init__(self, columnas, nombre):
         contador = 0
         self.Siguiente = None
@@ -106,7 +106,7 @@ class nodofila:
     def DevolverSiguiente(self):
         return self.Siguiente
 
-class nodosenal:
+class nodoSenal:
     def __init__(self, senal):
         self.senal  = senal
         self.Siguiente = None

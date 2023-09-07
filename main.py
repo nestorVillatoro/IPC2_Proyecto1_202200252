@@ -3,7 +3,6 @@ from xml.dom import minidom
 from listasColas import *
 from nodos import *
 import os
-# from listasColas import colasenales
 inicializador = 0
 ruta = ""
 # C:/Users/nyavi/Desktop/cuarto semestre/ipc 2/lab/IPC2_Proyecto1_202200252/Entrada-Ejemplo.xml
@@ -17,10 +16,10 @@ def cargarArchivo():
 def procesarArchivo():
     print("------ Procesar archivo ------")
     print("Mostrando datos originales...")
-    archivo = ET.parse("C:/Users/nyavi/Desktop/cuarto semestre/ipc 2/lab/IPC2_Proyecto1_202200252/Entrada-Ejemplo.xml")
+    archivo = ET.parse(ruta)
     raiz = archivo.getroot()
     global senales
-    senales = colasenales()
+    senales = colaSenales()
     for elementos in raiz:
         nombreSenal = elementos.get("nombre")
         tiempo = int(elementos.get("t"))
@@ -45,7 +44,7 @@ def procesarArchivo():
 
     print("Convirtiendo a binario...")
     global binarias
-    binarias = colasenales()
+    binarias = colaSenales()
     aux = senales.inicio
     while aux != None:
         auxi = aux.Obtenersenal()
@@ -65,7 +64,7 @@ def procesarArchivo():
 
     print("Generando datos de salida...")
     global datosFinales
-    datosFinales = colasenales()
+    datosFinales = colaSenales()
     auxBinarias = binarias.inicio
     auxSenales = senales.inicio
     while auxBinarias != None:
@@ -84,7 +83,7 @@ def procesarArchivo():
                         dato = auxSenales2.buscarDato(contadorfila, contadorColumnas) + auxSenales2.buscarDato(contadorfila2, contadorColumnas)
                         auxSenales2.CambiodeDato(contadorfila, contadorColumnas, dato)
                         contadorColumnas += 1
-                    auxSenales2.CambioNombrefila(contadorfila, str(auxSenales2.ObtenerNombrefila(contadorfila)) + ", " + str(auxSenales2.ObtenerNombrefila(contadorfila2)))
+                    auxSenales2.cambioNombrefila(contadorfila, str(auxSenales2.obtenerNombrefila(contadorfila)) + ", " + str(auxSenales2.obtenerNombrefila(contadorfila2)))
                     auxBinarias2.Eliminarfilas(contadorfila2)
                     auxSenales2.Eliminarfilas(contadorfila2)
                 else: 
@@ -99,14 +98,14 @@ def procesarArchivo():
 
 def escribirArchivoSalida():
     print("------ Escribir archivo salida ------")
-    tree = ET.parse("C:/Users/nyavi/Desktop/cuarto semestre/ipc 2/lab/IPC2_Proyecto1_202200252/Entrada-Ejemplo.xml")
+    tree = ET.parse(ruta)
     root = tree.getroot()
     data = ET.Element("senales")
     aux = datosFinales.inicio
     while aux != None:
         aux2 = aux.Obtenersenal()  
         items = ET.SubElement(data, "senal")
-        items.set("name", str(aux2.nombre))
+        items.set("nombre", str(aux2.nombre))
         items.set("t", str(aux2.filas))
         items.set("A", str(aux2.columnas))
         No_filas = 1
@@ -114,7 +113,7 @@ def escribirArchivoSalida():
             grupo = ET.SubElement(items, "grupos")
             grupo.set("G", str(No_filas))
             tiempos = ET.SubElement(grupo, "tiempo")
-            tiempos.text = str(aux2.ObtenerNombrefila(No_filas))
+            tiempos.text = str(aux2.obtenerNombrefila(No_filas))
             datosGrupo = ET.SubElement(grupo, "datosGrupo")
             No_columnas = 1
             while No_columnas <= int(aux2.columnas):
@@ -126,6 +125,7 @@ def escribirArchivoSalida():
                 No_columnas += 1
             No_filas += 1
         aux = aux.Siguiente    
+    print("Se generó el archivo de salida")
 
     myData = minidom.parseString(ET.tostring(data)).toprettyxml(indent="\t")
     myFile = open("Salida-Ejemplo.xml", "w")
@@ -145,25 +145,15 @@ def MostrarDatosEstud():
 
 def generarGraficas():
     print("------ Generar gráfica ------")
-    archivo = ET.parse("C:/Users/nyavi/Desktop/cuarto semestre/ipc 2/lab/IPC2_Proyecto1_202200252/Entrada-Ejemplo.xml")
+    archivo = ET.parse(ruta)
     raiz = archivo.getroot()
-
-    for elementos in raiz:
-        nombreSenal = elementos.get("nombre")
-        tiempo = int(elementos.get("t"))
-        amplitud = int(elementos.get("A"))
-        for datos in elementos.findall("dato"):
-            t = int(datos.get("t"))
-            A = int(datos.get("A"))
-
-    auxFinales = datosFinales.inicio
-    auxBinarias = binarias.inicio
-    auxFinales2 = auxFinales.Obtenersenal
-    auxBinarias2 = auxBinarias.Obtenersenal
     verificadorSenal = False
+    archivoOriginal = open("Graficas/Grafica-original.dot", "w")
     nombreSenal = input("Ingrese el nombre de la señal que desea graficar: ")
     for elementos in raiz:
         if nombreSenal == str(elementos.get("nombre")):
+            tiempo = str(elementos.get("t"))
+            amplitud = str(elementos.get("A"))
             verificadorSenal = True
             graficaOriginal = '''graph ""
     {
@@ -171,80 +161,136 @@ def generarGraficas():
         node [fontname="Helvetica,Arial,sans-serif"]
         edge [fontname="Helvetica,Arial,sans-serif"]
 
-        subgraph Prueba1 
+        subgraph Prueba1
         {
-            n1 [label="EJEMPLO 1"];
-        
-            n2 [label="t=5"];
-            n3 [label="A=4"];
+            n1 [label="'''+ nombreSenal +'''"];
+            n2 [label="t='''+ tiempo +'''"];
+            n3 [label="A='''+ amplitud +'''"];
             n1 -- n2;
             n1 -- n3;
+            '''
+            archivoOriginal.write(graficaOriginal)
             
-            # Fila 1
-            n4 [label="2"];
-            n1 -- n4;
-            n5 [label="3"];
-            n1 -- n5;
-            n6 [label="0"];
-            n1 -- n6;
-            n7 [label="4"];
-            n1 -- n7;
-            
-            n8 [label="0"];
-            n4 -- n8;
-            n9 [label="0"];
-            n5 -- n9;
-            n10 [label="6"];
-            n6 -- n10;
-            n11 [label="3"];
-            n7 -- n11;
-            
-            n12 [label="3"];
-            n8 -- n12;
-            n13 [label="4"];
-            n9 -- n13;
-            n14 [label="0"];
-            n10 -- n14;
-            n15 [label="2"];
-            n11 -- n15;
-            
-            n16 [label="1"];
-            n12 -- n16;
-            n17 [label="0"];
-            n13 -- n17;
-            n18 [label="1"];
-            n14 -- n18;
-            n19 [label="5"];
-            n15 -- n19;
-            
-            n20 [label="0"];
-            n16 -- n20;
-            n21 [label="0"];
-            n17 -- n21;
-            n22 [label="3"];
-            n18 -- n22;
-            n23 [label="1"];
-            n19 -- n23;
-        }
-    }
-'''
+            contador = 4
+            amp = 1
+            contadordup = contador
+            for datos in elementos.findall("dato"):
+                if amp <= int(amplitud):
+                    dato = str(datos.text)
+                    graficaOriginal2 = '''
+            n'''+ str(contador) +''' [label="'''+ dato + '''"];
+            n1 -- n'''+ str(contador) +''';'''
+                    contador += 1
+                    archivoOriginal.write(graficaOriginal2)
+                    amp += 1
+                else: 
+                    dato = str(datos.text)
+                    graficaOriginal2 = '''
+            n'''+ str(contador) +''' [label="'''+ dato + '''"];
+            n'''+ str(contadordup) + ''' -- n'''+ str(contador) +''';'''
+                    contador += 1
+                    archivoOriginal.write(graficaOriginal2)
+                    contadordup += 1
+                    
+            archivoOriginal.write('''
+                        }
+                        }''')
     if verificadorSenal == True:
-        archivoOriginal = open("Graficas/Grafica-original.dot", "w")
-        archivoOriginal.write(graficaOriginal)
         archivoOriginal.close()
         os.system("cmd /c dot -Tsvg Graficas/Grafica-original.dot > Graficas/Grafica-original.svg")
-    else: 
-        print("No se encontró la señal!")
+        print("Se generó la gráfica original exitosamente!")
+    else:
+        print("No se encontró la señal original!")
+# --------------------------------------------------------------------------------------------------------------------------
+    archivo = ET.parse("C:/Users/nyavi/Desktop/cuarto semestre/ipc 2/lab/IPC2_Proyecto1_202200252/Salida-Ejemplo.xml")
+    raiz = archivo.getroot()
+    verificadorSenal = False
+    archivoReducido = open("Graficas/Grafica-reducida.dot", "w")
+    for elementos in raiz:
+        if nombreSenal == str(elementos.get("nombre")):
+            amplitud = str(elementos.get("A"))
+            tiempo = int(elementos.get("t"))
+            verificadorSenal = True
+            graficaReducida = '''graph ""
+    {
+        fontname="Helvetica,Arial,sans-serif"
+        node [fontname="Helvetica,Arial,sans-serif"]
+        edge [fontname="Helvetica,Arial,sans-serif"]
+
+        subgraph Prueba1
+        {
+            n1 [label="'''+ nombreSenal +'''"];
+            n2 [label="A='''+ amplitud +'''"];
+            n1 -- n2;
+            '''
+            archivoReducido.write(graficaReducida)
+            contador = 3
+            tiemp = 1
+            for grupos in elementos.findall("grupos"):
+                for tiempos in grupos.findall("tiempo"):
+                    if tiemp == 1:
+                        Gr = str(grupos.get("G"))
+                        time = tiempos.text
+                        graficaReducida2 = '''
+                n'''+ str(contador) +''' [label="G='''+ Gr + " t = (" + time + ''')"];
+                n'''+ str(tiemp) + ''' -- n'''+ str(contador) +''';'''
+                        archivoReducido.write(graficaReducida2)
+                        contador += 1
+                        tiemp += 1
+                    else:
+                        contador2 = contador-1
+                        Gr = str(grupos.get("G"))
+                        time = tiempos.text
+                        graficaReducida2 = '''
+                n'''+ str(contador) +''' [label="G='''+ Gr + " t = (" + time + ''')"];
+                n'''+ str(contador2) + ''' -- n'''+ str(contador) +''';'''
+                        archivoReducido.write(graficaReducida2)
+                        contador += 1
+                        tiemp += 1 
+            amp = 1
+            contador3 = 7
+            contador4 = contador3
+            for grupos in elementos.findall("grupos"):            
+                for datosGrupos in grupos.findall("datosGrupo"):
+                    for datosReducidos in datosGrupos.findall("dato"):
+                        if amp <= int(amplitud):
+                            datoR = str(datosReducidos.text)
+                            graficaReducida3 = '''
+                    n'''+ str(contador3) +''' [label="'''+ datoR + '''"];
+                    n1 -- n'''+ str(contador3) +''';'''
+                            contador3 += 1
+                            archivoReducido.write(graficaReducida3)
+                            amp += 1
+                        else: 
+                            datoR = str(datosReducidos.text)
+                            graficaReducida3 = '''
+                    n'''+ str(contador3) +''' [label="'''+ datoR + '''"];
+                    n'''+ str(contador4) + ''' -- n'''+ str(contador3) +''';'''
+                            contador3 += 1
+                            archivoReducido.write(graficaReducida3)
+                            contador4 += 1       
+
+
+
+
+
+            archivoReducido.write('''
+                        }
+                        }''')
+    if verificadorSenal == True:
+        archivoReducido.close()
+        os.system("cmd /c dot -Tsvg Graficas/Grafica-reducida.dot > Graficas/Grafica-reducida.svg")
+        print("Se generó la gráfica reducida exitosamente!")
+    else:
+        print("No se encontró la señal reducida!")
     input("Presione cualquier tecla para continuar...")
 
-def inicializarSistema():
+def inicializarSistema(numero):
     print("------ Inicializar sistema ------")
     global inicializador
     inicializador = 203456
     input("Presione cualquier tecla para continuar...")
 
-def salir():
-    print("Saliendo del programa...")
 
 def menu():
     print("--------------------MENU--------------------")
@@ -274,10 +320,12 @@ def menu():
             generarGraficas()
             menu()
         case 6:
-            inicializarSistema()
+            print(":c")
+            menu()
             
         case 7:
-            salir()
+            print("Saliendo del programa...")
+
         case _:
             print("")
             print("Opción no válida")
@@ -285,6 +333,5 @@ def menu():
             menu()
 
 menu()
-if inicializador == 203456:
-    menu()
+
     

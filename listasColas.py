@@ -2,7 +2,7 @@ from nodos import *
 # from .nodos import nodofila
 # from .nodos import nodosenalinicio
 
-class colasenal:
+class colaSenal:
 
     def __init__(self):
         self.inicio = None
@@ -10,7 +10,7 @@ class colasenal:
         self.contador = 0
                 
     def insertar(self, columnas, nombre):
-        nodoNuevo = nodofila(columnas, nombre)
+        nodoNuevo = nodoFila(columnas, nombre)
         self.contador += 1
         if self.inicio == None:
             self.inicio = nodoNuevo
@@ -18,13 +18,6 @@ class colasenal:
         else:
             self.final.AsignarSiguiente(nodoNuevo)
             self.final = nodoNuevo
-    
-    def imprimirLista(self):
-        Auxiliar = self.inicio
-        while Auxiliar != None:
-            Auxiliar.Obtenerfila().imprimirfila()
-            Auxiliar = Auxiliar.Siguiente
-        print("")
 
     def CambiarEnfila(self, fila, columna, dato):
         contador = 0
@@ -67,6 +60,27 @@ class colasenal:
             Auxiliar = Auxiliar.Siguiente
             contador += 1
 
+    def obtenerNombrefila(self, fila):
+        contador = 1 
+        Auxiliar = self.inicio
+        while Auxiliar != None:
+            if contador == fila:
+                nombre = Auxiliar.Obtenerfila().ObtenerNombre()
+                return nombre
+            Auxiliar = Auxiliar.Siguiente
+            contador += 1
+
+    def cambioNombrefila(self, fila, nombre):
+        contador = 1 
+        Auxiliar = self.inicio
+        while Auxiliar != None:
+            if contador == fila:
+                Aux = Auxiliar.Obtenerfila()
+                Aux.cambioNombrefila(nombre)
+                Aux.tiempo = "Tiempos "
+            Auxiliar = Auxiliar.Siguiente
+            contador += 1
+
     def Eliminarfila(self,fila):
         contador = 1
         Auxiliar = self.inicio
@@ -82,26 +96,12 @@ class colasenal:
             contador += 1
         self.contador -= 1
 
-    def CambioNombrefila(self, fila, nombre):
-        contador = 1 
+    def imprimirLista(self):
         Auxiliar = self.inicio
         while Auxiliar != None:
-            if contador == fila:
-                Aux = Auxiliar.Obtenerfila()
-                Aux.CambioNombrefila(nombre)
-                Aux.tiempo = "Tiempos "
+            Auxiliar.Obtenerfila().imprimirfila()
             Auxiliar = Auxiliar.Siguiente
-            contador += 1
-
-    def ObtenerNombrefila(self, fila):
-        contador = 1 
-        Auxiliar = self.inicio
-        while Auxiliar != None:
-            if contador == fila:
-                nombre = Auxiliar.Obtenerfila().ObtenerNombre()
-                return nombre
-            Auxiliar = Auxiliar.Siguiente
-            contador += 1
+        print("")
 
 class senal: 
     def __init__(self, nombre, filas, columnas):
@@ -110,7 +110,7 @@ class senal:
         self.columnas = columnas
         contador = 0
         self.Siguiente = None
-        colasenales = colasenal()
+        colasenales = colaSenal()
         while contador < filas:
             colasenales.insertar(columnas, str(contador + 1))
             contador += 1
@@ -119,33 +119,36 @@ class senal:
     def imprimir_senal(self):
         self.senal.imprimirLista()
 
-    def CambiodeDato(self, fila, columna, dato):
-        self.senal.CambiarEnfila(fila,columna,dato)
-
     def buscarDato(self, fila, columna):
         dato = self.senal.buscarEnfila(fila,columna)
         dato2 = dato
         return dato2
+
+    def CambiodeDato(self, fila, columna, dato):
+        self.senal.CambiarEnfila(fila,columna,dato)
 
     def Obtenerfila(self, fila):
         if fila <= self.filas:
             datos = self.senal.ObtenerDatosfila(fila)
             return datos
         else:
-            print("No se puede obtener fila")
+            print("No se puede obtener la fila!")
     
     def Eliminarfilas(self, fila):
         self.senal.Eliminarfila(fila)
         self.filas -= 1
 
-    def CambioNombrefila(self, fila, nombre):
-        self.senal.CambioNombrefila(fila,nombre)
-
-    def ObtenerNombrefila(self, fila):
-        nombre = self.senal.ObtenerNombrefila(fila)
+    def obtenerNombrefila(self, fila):
+        nombre = self.senal.obtenerNombrefila(fila)
         return nombre
+
+    def cambioNombrefila(self, fila, nombre):
+        self.senal.cambioNombrefila(fila,nombre)
     
-class colasenales:
+    def Grafica(self, NodoPadre, NoFila):
+        a=2
+    
+class colaSenales:
 
     def __init__(self):
         self.inicio = None
@@ -153,7 +156,7 @@ class colasenales:
         self.contador = 0
                 
     def insertar(self, senal):
-        nodoNuevo = nodosenal(senal)
+        nodoNuevo = nodoSenal(senal)
         self.contador += 1
         if self.inicio == None:
             self.inicio = nodoNuevo

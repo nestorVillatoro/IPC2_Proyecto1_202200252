@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <senales>
-	<senal name="Ejemplo1" t="4" A="4">
+	<senal nombre="Ejemplo1" t="4" A="4">
 		<grupos G="1">
 			<tiempo>1</tiempo>
 			<datosGrupo>
@@ -38,7 +38,7 @@
 			</datosGrupo>
 		</grupos>
 	</senal>
-	<senal name="Ejemplo2" t="3" A="4">
+	<senal nombre="Ejemplo2" t="3" A="4">
 		<grupos G="1">
 			<tiempo>1, 3</tiempo>
 			<datosGrupo>
@@ -67,7 +67,7 @@
 			</datosGrupo>
 		</grupos>
 	</senal>
-	<senal name="Ejemplo3" t="3" A="5">
+	<senal nombre="Ejemplo3" t="3" A="5">
 		<grupos G="1">
 			<tiempo>1</tiempo>
 			<datosGrupo>
